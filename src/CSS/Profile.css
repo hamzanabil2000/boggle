@@ -1,0 +1,144 @@
+.profile-container{
+  background-color: #80cafc;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+  padding-top: 3.5px;
+}
+
+.profilerounded-container {
+  border: 2px solid black;
+  border-radius: 50px;
+  width: 98.5%;
+  height: 98.5%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #6897fe;
+  align-self: center;
+}
+
+.back-button {
+  position: absolute;
+  top: 20px;
+  left: 25px;
+  background: none;
+  border: none;
+  font-size: 30px;
+  color: black;
+  cursor: pointer;
+  margin-top: 7px;
+}
+
+.editprofile-pic-container {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.editprofile-pic {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 1px solid black;
+  margin-left: 610px;
+  margin-top: 40px;
+}
+
+.editprofile-name {
+  margin-left: 12px;
+  font-size: 1.2em;
+  color: white;
+  align-self: center;
+  margin-top: 20px;
+  margin-right: 8px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.editprofile-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 8px;
+  position: relative;
+}
+
+.profileedit-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  padding: 2px;
+  font-size: 20px;
+  cursor: pointer;
+  margin-right: 625px;
+  border: 1px solid black;
+}
+
+
+.editProfilerounded-container > form > input{
+  width: 300px;
+  height: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 20px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  
+}
+
+.editProfilerounded-container > form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-stats {
+  margin-top: 30px;
+}
+
+.profile-stats > table {
+  width: 50%;
+  align-self: center;
+  margin-left: 270px;
+}
+
+.profile-stat-label{
+  font-size: 25px;
+  color: #333;
+  padding: 8px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.profile-stat-value{
+  font-size: 25px;
+  color: #333;
+  padding: 8px 0;
+  text-align: center;
+  font-weight: bold;
+}
+
+.buttonSave {
+  margin-top: 40px;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #1579e9;
+  color: black;
+  font-weight: bold;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border: 1px solid black;
+}
+
+.buttonSave:hover {
+  background-color: #6897fe;
+}

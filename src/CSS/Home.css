@@ -1,0 +1,128 @@
+.Homeouter-container {
+  background-color: #80cafc;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  height: 100vh;
+  padding-top: 3.5px;
+}
+
+.Homerounded-container {
+  border: 2px solid black;
+  border-radius: 50px;
+  width: 98.5%;
+  height: 98.5%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #6897fe;
+  align-self: center;
+}
+.Homerounded-container > h1 {
+  margin-top: 20px;
+}
+.buttonCreate {
+  margin-top: 130px;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #1579e9;
+  color: black;
+  font-weight: bold;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border: 1px solid black;
+}
+.buttonJoin {
+  margin-top: 30px;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: #1579e9;
+  color: black;
+  font-weight: bold;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border: 1px solid black;
+}
+.buttonLogout {
+  margin-top: 30px;
+  width: 200px;
+  height: 50px;
+  border-radius: 20px;
+  background-color: red;
+  color: black;
+  font-weight: bold;
+  font-size: 22px;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: pointer;
+  border: none;
+  border: 1px solid black;
+}
+.buttonCreate:hover {
+  background-color: #6897fe;
+}
+.buttonJoin:hover {
+  background-color: #6897fe;
+}
+.buttonLogout:hover {
+  background-color: #f9555f;
+}
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  margin-top: -9px;
+  position: relative;
+}
+.profile-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-left: 10px;
+}
+
+.edit-icon {
+  position: absolute;
+  bottom: 0.9;
+  right: 0;
+  background: black;
+  color: white;
+  border-radius: 50%;
+  padding: 6px;
+  font-size: 15px;
+  cursor: pointer;
+  margin-right:32px;
+}
+
+.profile-pic-container {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column; /* Change this to column */
+  align-items: center; /* Center the items horizontally */
+  text-align: center; /* Center the text */
+}
+
+
+.profile-pic {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 1px solid black;
+}
+
+.profile-name {
+  margin-top: 15px;
+  margin-left: 10px;
+  font-size: 1.2em;
+  color: white;
+}
