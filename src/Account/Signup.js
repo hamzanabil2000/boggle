@@ -3,6 +3,7 @@ import "../CSS/Signup.css";
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
 import { useNavigate } from "react-router-dom";
+import { toast, Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -10,14 +11,13 @@ const Signup = () => {
   const [playerUid, setPlayerUid] = useState("");
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
 
   const handleSignUp = async (e) => {
     e.preventDefault();
 
     // Validate user input before making the API call
     if (!playerUid || !fullName || !password) {
-      setError("Please fill out all fields and upload an image.");
+      toast.error("Please fill out all fields.");
       return;
     }
 
@@ -43,18 +43,17 @@ const Signup = () => {
 
       if (response.ok) {
         navigate("/");
-      } else if (response.status === 302) {
-        setError("User already exists.");
       } else {
-        setError("Error while signing up. Please try again later.");
+        toast.error("User already exists.");
       }
     } catch (error) {
-      setError("Network error: " + error.message);
+      toast.error("Network error: " + error.message);
     }
   };
 
   return (
     <div className="signupouter-container">
+      <Toaster /> {/* Add Toaster here */}
       <div className="singuprounded-container">
         <h1>CREATE AN ACCOUNT</h1>
         <form>
@@ -108,12 +107,11 @@ const Signup = () => {
             }}
           />
           <input type="password" placeholder="Confirm Password" />
-          
+
           <button className="button" onClick={handleSignUp}>
             Sign Up
           </button>
         </form>
-        {error && <p className="error-message">{error}</p>}
         <p>
           Already have an account? <a href="/">Login</a>
         </p>

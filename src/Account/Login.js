@@ -4,17 +4,18 @@ import BoggleImage from "../Assets/Images/BoggleImage.png";
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Login = () => {
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+
   const handleLogin = async (e) => {
     e.preventDefault();
 
     if (!userName || !password) {
-      alert("Please fill out all fields.");
+      toast.error("Please fill out all fields.");
       return;
     }
 
@@ -30,25 +31,23 @@ const Login = () => {
       );
 
       const data = await response.json();
-      console.log(data);
 
       if (response.ok) {
         // response.ok is true for status codes in the range 200-299
         localStorage.setItem("player", JSON.stringify(data));
         localStorage.setItem("photo", JSON.stringify(data));
 
-        // Redirect to home page
         navigate("/home", { state: { user: data } });
       } else {
         // Handle specific error codes
         if (response.status === 401) {
-          alert("Invalid credentials. Please try again.");
+          toast.error("Invalid credentials. Please try again.");
         } else {
-          alert("An error occurred: " + data.message);
+          toast.error("An error occurred: " + data.message);
         }
       }
     } catch (error) {
-      alert("Error during login: " + error.message);
+      toast.error("Error during login: " + error.message);
       console.error("An error occurred while processing your request:", error);
     }
   };
@@ -99,6 +98,9 @@ const Login = () => {
           Don't have an account? <a href="/signup">Signup</a>
         </p>
       </div>
+
+      {/* Toast container */}
+      <Toaster />
     </div>
   );
 };

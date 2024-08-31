@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import ProfilePic from "../Assets/Images/ProfilePic.jpg";
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
+import toast, { Toaster } from "react-hot-toast"; // Import react-hot-toast
 
 const EditProfile = () => {
   const [fullName, setFullName] = useState("");
@@ -49,25 +50,25 @@ const EditProfile = () => {
   const handleSaveClick = () => {
     const player = JSON.parse(localStorage.getItem("player"));
 
-    // Validation logic with individual alerts
+    // Validation logic with toast messages
     if (!fullName) {
-      alert("Please enter your name.");
+      toast.error("Please enter your name.");
       return; // Prevent further execution
     }
 
     if (newPassword) {
       if (!oldPassword) {
-        alert("Please enter your old password.");
+        toast.error("Please enter your old password.");
         return; // Prevent further execution
       }
 
       if (!confirmPassword) {
-        alert("Please confirm your new password.");
+        toast.error("Please confirm your new password.");
         return; // Prevent further execution
       }
 
       if (newPassword !== confirmPassword) {
-        alert("New Password and Confirm Password do not match.");
+        toast.error("New Password and Confirm Password do not match.");
         return; // Prevent further execution
       }
     }
@@ -101,10 +102,15 @@ const EditProfile = () => {
       })
       .then((data) => {
         localStorage.setItem("player", JSON.stringify(data));
-        alert("Profile updated successfully!");
-        navigate("/home", { state: { user: data } });
+        toast.success("Profile updated successfully!");
+        setTimeout(() => {
+          navigate("/home", { state: { user: data } });
+        }, 1000); // Delay to allow toast to show
       })
-      .catch((error) => console.error("Error updating profile:", error));
+      .catch((error) => {
+        toast.error(`Error updating profile: ${error.message}`);
+        console.error("Error updating profile:", error);
+      });
   };
 
   if (!user) {
@@ -113,6 +119,7 @@ const EditProfile = () => {
 
   return (
     <div className="editProfile-container">
+      <Toaster /> {/* Add Toaster component */}
       <div className="editProfilerounded-container">
         <h1>EDIT PROFILE</h1>
         <button className="back-button" onClick={handlePreviousClick}>

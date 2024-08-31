@@ -9,6 +9,7 @@ import Modal from "@mui/material/Modal";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useLocation } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast"; // Importing Toaster and toast
 
 const style = {
   position: "absolute",
@@ -29,10 +30,10 @@ const style = {
 const Home = () => {
   const location = useLocation();
   const user = location.state?.user || null;
-  // const { user } = location.state;
   const [fullName, setFullName] = useState(null);
   const [profilePic, setProfilePic] = useState(ProfilePic);
-  const [open, setOpen] = useState(false);
+  const [createOpen, setCreateOpen] = useState(false); // For "Create Game" modal
+  const [joinOpen, setJoinOpen] = useState(false); // For "Join Game" modal
   const [players, setPlayers] = useState("");
   const [time, setTime] = useState("");
   const navigate = useNavigate();
@@ -47,6 +48,7 @@ const Home = () => {
       );
     }
   }, [user]);
+
   const handlePreviousClick = () => {
     navigate("/");
   };
@@ -55,9 +57,10 @@ const Home = () => {
     navigate("/profile", { state: { user: user } });
   };
 
-  const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
-  const handleJoinOpen = () => false;
+  const handleCreateOpen = () => setCreateOpen(true);
+  const handleCreateClose = () => setCreateOpen(false);
+  const handleJoinOpen = () => setJoinOpen(true);
+  const handleJoinClose = () => setJoinOpen(false);
   const handlePlayersChange = (event, newPlayers) => {
     setPlayers(newPlayers);
   };
@@ -67,6 +70,11 @@ const Home = () => {
   };
 
   const handleCreateGame = () => {
+    if (!players || !time) {
+      toast.error("Please select both number of players and time."); // Show error if either is not selected
+      return;
+    }
+
     const player = JSON.parse(localStorage.getItem("player"));
     const pid = player?.player_uid;
 
@@ -111,16 +119,18 @@ const Home = () => {
       })
       .then((message) => {
         console.log("Game created successfully:", message);
-        alert("Game created", message);
-        setOpen(false); // Close the modal after successful creation
+        toast.success("Game created successfully!"); // Display success message
+        setCreateOpen(false); // Close the modal after successful creation
       })
       .catch((error) => {
         console.error("Error creating game:", error);
+        toast.error("Failed to create game"); // Display error message
       });
   };
 
   return (
     <div className="Homeouter-container">
+      <Toaster /> {/* Renders the Toaster for displaying toasts */}
       <div className="Homerounded-container">
         <h1>HOME</h1>
         <div className="profile-pic-container">
@@ -133,7 +143,7 @@ const Home = () => {
           </span>
         </div>
         <div className="buttons">
-          <button className="buttonCreate" onClick={handleOpen}>
+          <button className="buttonCreate" onClick={handleCreateOpen}>
             Create Game
           </button>
           <br />
@@ -147,10 +157,9 @@ const Home = () => {
           <br />
         </div>
       </div>
-
       <Modal
-        open={open}
-        onClose={handleClose}
+        open={createOpen}
+        onClose={handleCreateClose}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -275,20 +284,38 @@ const Home = () => {
               </ToggleButton>
             </ToggleButtonGroup>
           </div>
-          <Button
-            variant="contained"
-            color="primary"
-            style={{
-              marginTop: "50px",
-              backgroundColor: "green",
-              borderRadius: "20px",
-              padding: "10px 30px",
-              fontSize: "20px",
-            }}
-            onClick={handleCreateGame}
+          <div style={{ marginTop: "20px" }}>
+            <Button
+              variant="contained"
+              onClick={handleCreateGame}
+              style={{
+                marginTop: "20px",
+                borderRadius: "20px",
+                backgroundColor: "green",
+                color: "#fff",
+              }}
+            >
+              Create Game
+            </Button>
+          </div>
+        </Box>
+      </Modal>
+      <Modal
+        open={joinOpen}
+        onClose={handleJoinClose}
+        aria-labelledby="join-modal-title"
+        aria-describedby="join-modal-description"
+      >
+        <Box sx={style}>
+          <Typography
+            id="join-modal-title"
+            variant="h6"
+            component="h2"
+            style={{ fontWeight: "bold", marginBottom: "20px" }}
           >
-            Create
-          </Button>
+            Join Game
+          </Typography>
+          {/* Add join game logic here */}
         </Box>
       </Modal>
     </div>
