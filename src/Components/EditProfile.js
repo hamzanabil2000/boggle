@@ -102,9 +102,7 @@ const EditProfile = () => {
       })
       .then((data) => {
         localStorage.setItem("player", JSON.stringify(data));
-        setTimeout(() => {
-          navigate("/home", { state: { user: data, successMessage: "Profile updated successfully!" } });
-        }, 500); // Delay to allow toast to show
+        navigate("/home", { state: { user: data } });
       })
       .catch((error) => {
         toast.error(`Error updating profile: ${error.message}`);
