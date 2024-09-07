@@ -36,6 +36,8 @@ const Home = () => {
   const [joinOpen, setJoinOpen] = useState(false); // For "Join Game" modal
   const [players, setPlayers] = useState("");
   const [time, setTime] = useState("");
+  const [isWaiting, setIsWaiting] = useState(false); // For "Waiting for others" message
+
   const navigate = useNavigate();
 
   // Use useEffect to set the fullName once after the component mounts
@@ -103,6 +105,9 @@ const Home = () => {
     console.log("Game Data being sent:", gameData);
     console.log("Player ID:", pid);
 
+    // Set waiting message
+    setIsWaiting(true);
+
     fetch(`http://localhost/BoggleGameAPI/api/Game/CreateGame?pid=${pid}`, {
       method: "POST",
       headers: {
@@ -125,7 +130,22 @@ const Home = () => {
       .catch((error) => {
         console.error("Error creating game:", error);
         toast.error("Failed to create game"); // Display error message
+        setIsWaiting(false); // Remove waiting message in case of error
       });
+  };
+
+
+  const handleJoinRoom = (roomId) => {
+    navigate("/board", { state: { user: user } });
+    console.log(`Joining room ${roomId}`);
+    // Implement join room logic here
+    toast.success(`Joined room ${roomId} successfully!`);
+  };
+
+  const handleSpectateRoom = (roomId) => {
+    console.log(`Spectating room ${roomId}`);
+    // Implement spectate room logic here
+    toast.success(`Spectating room ${roomId}`);
   };
 
   return (
@@ -157,6 +177,7 @@ const Home = () => {
           <br />
         </div>
       </div>
+      {/* Create Game */}
       <Modal
         open={createOpen}
         onClose={handleCreateClose}
@@ -300,22 +321,78 @@ const Home = () => {
           </div>
         </Box>
       </Modal>
+      {/* Join Game */}
       <Modal
         open={joinOpen}
         onClose={handleJoinClose}
         aria-labelledby="join-modal-title"
         aria-describedby="join-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} style={{ width: "350px" }}>
           <Typography
             id="join-modal-title"
             variant="h6"
             component="h2"
             style={{ fontWeight: "bold", marginBottom: "20px" }}
           >
-            Join Game
+            Active Games
           </Typography>
-          {/* Add join game logic here */}
+          <div style={{ width: "100%", textAlign: "center" }}>
+            {/* Room 1 */}
+            <div className="room-container">
+              <div className="room-info">
+                <span>Room1</span>
+                <span>3/4</span>
+              </div>
+              <div className="room-actions">
+                <button
+                  variant="contained"
+                  onClick={() => handleSpectateRoom(1)}
+                  style={{
+                    fontWeight: "bold",
+                    marginTop: "20px",
+                    borderRadius: "20px",
+                    padding: "10px 20px",
+                    margin: "0 8px",
+                    border: "1px solid black",
+                    backgroundColor: "green",
+                    color: "#fff",
+                  }}
+                >
+                  Spectate
+                </button>
+                <button
+                  variant="contained"
+                  onClick={() => handleJoinRoom(1)}
+                  style={{
+                    fontWeight: "bold",
+                    marginTop: "20px",
+                    borderRadius: "20px",
+                    padding: "10px 20px",
+                    margin: "0 8px",
+                    border: "1px solid black",
+                    backgroundColor: "green",
+                    color: "#fff",
+                  }}
+                >
+                  Join
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <button
+            onClick={handleJoinClose}
+            style={{
+              marginTop: "20px",
+              padding: "10px",
+              backgroundColor: "#000",
+              color: "#fff",
+              borderRadius: "20px",
+            }}
+          >
+            Close
+          </button>
         </Box>
       </Modal>
     </div>

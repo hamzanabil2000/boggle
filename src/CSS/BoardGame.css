@@ -1,0 +1,133 @@
+.Boardouter-container {
+  background-color: #80cafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  padding-top: 10px;
+}
+
+.Boardrounded-container {
+  border: 2px solid black;
+  border-radius: 50px;
+  width: 95%;
+  height: 95%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #6897fe;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.Boardrounded-container > h1 {
+  text-align: center;
+}
+
+.back-button {
+  align-self: flex-start;
+  margin-left: 20px;
+  font-size: 20px;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.top-players {
+  display: flex;
+  justify-content: space-between;
+  width: 100px;
+  margin-bottom: 20px;
+}
+
+.player-profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+
+.player-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid white;
+  margin-bottom: 5px;
+}
+
+.player-name {
+  font-size: 14px;
+  color: white;
+  text-align: center;
+}
+
+.player-time {
+  font-size: 12px;
+  color: #333;
+  text-align: center;
+}
+
+.board-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-rows: repeat(3, 2fr);
+  grid-gap: 15px;
+  background-color: #0058a0;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.grid-row {
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid-cell {
+  width: 40px;
+  height: 40px;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin: 10px; 
+}
+
+.current-player {
+  display: flex;
+  align-items: center;
+  background-color: #e0e0e0;
+  padding: 10px;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  margin-top: 20px;
+}
+
+.current-player-image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.current-player-name {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  flex-grow: 1;
+}
+
+.current-player-time {
+  font-size: 16px;
+  color: #555;
+}

@@ -5,6 +5,7 @@ import Signup from "./Account/Signup";
 import Home from "./Components/Home";
 import EditProfile from "./Components/EditProfile";
 import Profile from "./Components/Profile";
+import BoardGame from "./Components/BoardGame";
 
 const App = () => {
   return (
@@ -23,6 +24,9 @@ const App = () => {
 
           {/* Profile */}
           <Route path="/profile" element={<Profile />} />
+
+          {/* Board */}
+          <Route path="/board" element={<BoardGame />} />
         </Routes>
       </div>
     </Router>
